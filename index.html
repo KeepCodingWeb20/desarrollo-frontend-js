@@ -4,29 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+
+  <style>
+    .tweet {
+      border: solid 1px gray;
+      border-radius: 12px;
+      padding: 0.5rem;
+    }
+
+    .tweet + .tweet {
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
 
   <h1>Hello World KC!</h1>
 
-  <section class="section-1">
-    <h2>Primera sección</h2>
-    <div class="content">
-      <p>Título 1</p>
-      <p>Título 2</p>
-      <form>
-        <label for="test">Nombre: </label>
-        <input id="test" type="text">
-      </form>
-    </div>
-  </section>
-
-  <section class="section-2">
-    <h2>Segunda sección</h2>
-    <div class="content">
-      <img src="https://d92mrp7hetgfk.cloudfront.net/images/sites/misc/logo_circulo_keepcoding_ajustado/original.png?1560210065" alt="kc-logo">
-    </div>
-  </section>
+  <section class="tweets-container"></section>
 
   <script>
     console.log("hello world!");
