@@ -1,4 +1,4 @@
-const tweets = [{
+export const tweets = [{
    handler: '@usuario1',
    createdAt: new Date().toISOString(),
    message: 'Eligendi fugiat veniam a neque omnis doloribus sequi porro expedita ullam excepturi.',
