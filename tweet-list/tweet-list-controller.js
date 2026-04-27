@@ -1,14 +1,26 @@
-import { tweets } from "./tweet-list-model.js"
+import { getTweets } from "./tweet-list-model.js"
 import { buildTweet } from "./tweet-list-view.js";
 
 
-export const tweetListController = (tweetContainer) => {
+export const tweetListController = async (tweetContainer) => {
   
-  tweets.forEach((tweet) => {
-    const newTweetElement = buildTweet(tweet);
-    tweetContainer.appendChild(newTweetElement)
-  });
+  try {
+    const tweets = await getTweets();
+    showTweets(tweets);
+  } catch (error) {
+    alert('no ha sido posible obtener tweets')
+  }
+
+
+  const showTweets = (tweets) => {
+    tweets.forEach((tweet) => {
+      const newTweetElement = buildTweet(tweet);
+      tweetContainer.appendChild(newTweetElement)
+    });
+  }
 }
+
+
 
 
 // los controladores recibirán e
