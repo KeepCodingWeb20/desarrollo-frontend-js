@@ -6,22 +6,16 @@ export const tweetListController = async (tweetContainer) => {
   
   try {
     const tweets = await getTweets();
-    showTweets(tweets);
+    showTweets(tweets, tweetContainer);
   } catch (error) {
     alert('no ha sido posible obtener tweets')
   }
 
-
-  const showTweets = (tweets) => {
-    tweets.forEach((tweet) => {
-      const newTweetElement = buildTweet(tweet);
-      tweetContainer.appendChild(newTweetElement)
-    });
-  }
 }
 
-
-
-
-// los controladores recibirán e
-//  nodo del DOM que tienen que gestionar 
+const showTweets = (tweets, tweetContainer) => {
+  tweets.forEach((tweet) => {
+    const newTweetElement = buildTweet(tweet);
+    tweetContainer.appendChild(newTweetElement)
+  });
+}
