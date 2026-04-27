@@ -1,8 +1,9 @@
 
 
 export const getTweets = async () => {
-  
-  // fetch al endpoint de sparrest localhost:8000/api/tweets
+  // mostrar ruleta --> NO porque el modelo se encarga de obtener datos, 
+  // no de gestionar el DOM
+
   const response = await fetch('http://localhost:8000/api/tweets');
   const tweets = await response.json();
   
