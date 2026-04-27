@@ -5,13 +5,15 @@ import { buildTweet } from "./tweet-list-view.js";
 export const tweetListController = async (tweetContainer) => {
 
   try {
-    // mostrar ruleta
+    const tweetsLoadingEvent = new CustomEvent("loadTweetsStarted")
+    tweetContainer.dispatchEvent(tweetsLoadingEvent)
     const tweets = await getTweets();
     showTweets(tweets, tweetContainer);
   } catch (error) {
     alert('no ha sido posible obtener tweets')
   } finally {
-    // ocultar ruleta
+    const tweetsLoadedEvent = new CustomEvent("loadTweetsFinished")
+    tweetContainer.dispatchEvent(tweetsLoadedEvent)
   }
 
   

@@ -7,17 +7,14 @@ const tweetsContainer = document.querySelector('.tweets-container');
 const spinnerContainer = document.querySelector('.spinner-container');
 
 
+const { showSpinner, hideSpinner } = spinnerController(spinnerContainer)
+tweetsContainer.addEventListener("loadTweetsStarted", showSpinner)
+tweetsContainer.addEventListener("loadTweetsFinished", hideSpinner)
+
+
 tweetListController(tweetsContainer);
 
 
-
-setTimeout(() => {
-  showSpinner()
-}, 4000);
-
-setTimeout(() => {
-  hideSpinner()
-}, 8000);
 
 // el Modelo se encarga de obtención de datos
 // la vista se encarga de la generación de código HTML que usaremos
