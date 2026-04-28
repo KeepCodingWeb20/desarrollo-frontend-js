@@ -33,13 +33,27 @@ export const signupController =  (signupForm) => {
       try {
         await createUser(email, password)
         // notificación OK + redirección
-        alert('user creado OK')
+        // alert('user creado OK')
+        const userCreatedEvent = new CustomEvent("userCreated", {
+          detail: {
+            message: "Te has registrado correctamente",
+            type: "success"
+          }
+        })
+        signupForm.dispatchEvent(userCreatedEvent);
         setTimeout(() => {
           window.location = '/'
         }, 1500);
       } catch (error) {
         // notificación KO - motivo
-        alert(error.message)
+        // alert(error.message)
+        const userNotCreatedEvent = new CustomEvent("userNotCreated", {
+          detail: {
+            message: error.message,
+            type: "error"
+          }
+        })
+        signupForm.dispatchEvent(userNotCreatedEvent);
       }
     }
 
