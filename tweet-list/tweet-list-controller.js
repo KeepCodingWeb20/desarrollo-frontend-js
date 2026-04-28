@@ -10,9 +10,12 @@ export const tweetListController = async (tweetContainer) => {
     const tweets = await getTweets();
     showTweets(tweets, tweetContainer);
   } catch (error) {
-    // alert('no ha sido posible obtener tweets')
-    // https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
-    const tweetsFailedEvent = new CustomEvent("loadTweetsFailed")
+    const tweetsFailedEvent = new CustomEvent("loadTweetsFailed", {
+      detail:{
+        message: 'no ha sido posible obtener tweets',
+        type: 'error'
+      }
+    })
     tweetContainer.dispatchEvent(tweetsFailedEvent)
   } finally {
     const tweetsLoadedEvent = new CustomEvent("loadTweetsFinished")

@@ -15,39 +15,15 @@ tweetsContainer.addEventListener("loadTweetsFinished", hideSpinner)
 
 const { showNotification } = notificationsController(notificationsContainer)
 
+tweetsContainer.addEventListener("loadTweetsFailed", (event) => {
+  showNotification(event.detail.message, event.detail.type)
+
+  setTimeout(() => {
+    showNotification("segunda notificación", "success")
+  }, 1500);
+  setTimeout(() => {
+    showNotification("tercera notificación", "success")
+  }, 3500);
+})
+
 tweetListController(tweetsContainer);
-
-
-
-// el Modelo se encarga de obtención de datos
-// la vista se encarga de la generación de código HTML que usaremos
-// el controlador hace de intermediario entre el modelo y la vista.
-// Gestiona un único nodo del DOM.
-
-
-/*
-
-// create custom events
-const catFound = new CustomEvent("animalfound", {
-  detail: {
-    name: "cat",
-  },
-});
-const dogFound = new CustomEvent("animalfound", {
-  detail: {
-    name: "dog",
-  },
-});
-
-const element = document.createElement("div"); // create a <div> element
-
-// add an appropriate event listener
-element.addEventListener("animalfound", (e) => console.log(e.detail.name));
-
-// dispatch the events
-element.dispatchEvent(catFound);
-element.dispatchEvent(dogFound);
-
-// "cat" and "dog" logged in the console
-
-*/
