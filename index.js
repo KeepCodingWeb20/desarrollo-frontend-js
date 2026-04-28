@@ -1,3 +1,4 @@
+import { notificationsController } from "./notifications/notification-controller.js";
 import { spinnerController } from "./spinner/spinner-controller.js";
 import { tweetListController } from "./tweet-list/tweet-list-controller.js";
 
@@ -5,12 +6,14 @@ import { tweetListController } from "./tweet-list/tweet-list-controller.js";
 
 const tweetsContainer = document.querySelector('.tweets-container');
 const spinnerContainer = document.querySelector('.spinner-container');
+const notificationsContainer = document.querySelector('.notifications-container');
 
 
 const { showSpinner, hideSpinner } = spinnerController(spinnerContainer)
 tweetsContainer.addEventListener("loadTweetsStarted", showSpinner)
 tweetsContainer.addEventListener("loadTweetsFinished", hideSpinner)
 
+const { showNotification } = notificationsController(notificationsContainer)
 
 tweetListController(tweetsContainer);
 
