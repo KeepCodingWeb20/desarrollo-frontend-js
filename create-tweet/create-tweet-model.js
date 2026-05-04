@@ -10,7 +10,8 @@ export const createTweet = async (content) => {
       'Authorization': `bearer ${token}`,
     },
     body: JSON.stringify({
-      content
+      content,
+      likes: 0
     })
   })
 }
