@@ -3,6 +3,7 @@ import { buildTweet } from "./tweet-list-view.js";
 
 
 export const tweetListController = async (tweetContainer) => {
+  tweetContainer.innerHTML = ''
 
   try {
     const tweetsLoadingEvent = new CustomEvent("loadTweetsStarted")

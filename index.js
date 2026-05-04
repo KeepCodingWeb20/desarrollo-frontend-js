@@ -28,5 +28,12 @@ tweetsContainer.addEventListener("loadTweetsFailed", (event) => {
   }, 3500);
 })
 
+createTweetContainer.addEventListener('tweetCreated', () => {
+  // window.location.reload();
+  tweetListController(tweetsContainer);
+  
+})
+
 tweetListController(tweetsContainer);
 createTweetController(createTweetContainer);
+

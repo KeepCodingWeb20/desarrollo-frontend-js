@@ -16,7 +16,14 @@ export const createTweetController = (createTweetContainer) => {
       const formData = new FormData(form);
       const content = formData.get('new-tweet')
 
-      await createTweet(content)
+      try {
+        await createTweet(content)
+        const newTweetEvent = new CustomEvent('tweetCreated')
+        createTweetContainer.dispatchEvent(newTweetEvent);
+      } catch (error) {
+        alert(error.message)        
+      }
+
     })
   }
 }
