@@ -1,5 +1,5 @@
-import { getTweetById } from "./tweet-detail-model.js";
-import { buildTweetDetail } from "./tweet-detail-view.js";
+import { getLoggedUserInfo, getTweetById } from "./tweet-detail-model.js";
+import { buildRemoveTweetButton, buildTweetDetail } from "./tweet-detail-view.js";
 
 export const tweetDetailController = async (tweetDetailContainer) => {
 
@@ -12,9 +12,27 @@ export const tweetDetailController = async (tweetDetailContainer) => {
     try {
       const tweet = await getTweetById(tweetId);
       tweetDetailContainer.innerHTML = buildTweetDetail(tweet)
+      handleRemoveTweetButton(tweet.userId, tweetDetailContainer)
     } catch (error) {
       alert(error.message)
       window.location = '/'
+    }
+  }
+
+}
+
+const handleRemoveTweetButton = async (tweetUserId, tweetDetailContainer) => {
+  const token = localStorage.getItem('token');
+
+  if (token) {
+    try {
+      const loggedUser = await getLoggedUserInfo()
+      if (loggedUser.id === tweetUserId) {
+        const removeTweetButton = buildRemoveTweetButton()
+        tweetDetailContainer.appendChild(removeTweetButton)
+      }
+    } catch (error) {
+      
     }
   }
 }

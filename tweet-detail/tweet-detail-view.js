@@ -12,6 +12,14 @@ export const buildTweetDetail = (tweet) => {
   `
 }
 
+export const buildRemoveTweetButton = () => {
+  const removeTweetButton = document.createElement('button')
+  removeTweetButton.textContent = 'Eliminar tweet';
+
+  return removeTweetButton
+}
+
+
 // "content": "prueba creación tweet",
 //     "userId": 1,
 //     "updatedAt": "2026-05-04T19:34:52.628Z",
