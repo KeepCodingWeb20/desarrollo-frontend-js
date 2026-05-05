@@ -1,5 +1,5 @@
-import { getLoggedUserInfo, getTweetById, removeTweet } from "./tweet-detail-model.js";
-import { buildRemoveTweetButton, buildTweetDetail } from "./tweet-detail-view.js";
+import { getLoggedUserInfo, getTweetById, removeTweet, updateTweet } from "./tweet-detail-model.js";
+import { buildRemoveTweetButton, buildTweetDetail, buildEditTweetButton } from "./tweet-detail-view.js";
 
 export const tweetDetailController = async (tweetDetailContainer) => {
 
@@ -12,12 +12,30 @@ export const tweetDetailController = async (tweetDetailContainer) => {
     try {
       const tweet = await getTweetById(tweetId);
       tweetDetailContainer.innerHTML = buildTweetDetail(tweet)
-      handleRemoveTweetButton(tweet, tweetDetailContainer)
+      handleUserActions(tweet, tweetDetailContainer)
     } catch (error) {
       alert(error.message)
       window.location = '/'
     }
   }
+
+}
+
+const handleEditTweetButton = (tweet, tweetDetailContainer) => {
+
+  const editTweetButton = buildEditTweetButton();
+  tweetDetailContainer.appendChild(editTweetButton);
+  editTweetButton.addEventListener('click', async () => {
+    const updatedContent = window.prompt("Editar tweet", tweet.content);
+    if (updatedContent) {
+      try {
+        await updateTweet(tweet.id, updatedContent)
+        window.location = '/'
+      } catch (error) {
+        
+      }
+    }
+  })
 
 }
 
@@ -34,8 +52,15 @@ const confirmRemoveTweet = async (tweetId) => {
   }
 }
 
+const handleRemoveTweet = (tweet, tweetDetailContainer) => {
+  const removeTweetButton = buildRemoveTweetButton()
+  tweetDetailContainer.appendChild(removeTweetButton)
+  removeTweetButton.addEventListener('click', (event) => {
+    confirmRemoveTweet(tweet.id)
+  })
+}
 
-const handleRemoveTweetButton = async (tweet, tweetDetailContainer) => {
+const handleUserActions = async (tweet, tweetDetailContainer) => {
   const tweetUserId = tweet.userId;
   const token = localStorage.getItem('token');
 
@@ -43,14 +68,11 @@ const handleRemoveTweetButton = async (tweet, tweetDetailContainer) => {
     try {
       const loggedUser = await getLoggedUserInfo()
       if (loggedUser.id === tweetUserId) {
-        const removeTweetButton = buildRemoveTweetButton()
-        tweetDetailContainer.appendChild(removeTweetButton)
-        removeTweetButton.addEventListener('click', (event) => {
-          confirmRemoveTweet(tweet.id)
-        })
+        handleRemoveTweet(tweet, tweetDetailContainer);
+        handleEditTweetButton(tweet, tweetDetailContainer);
       }
     } catch (error) {
-      
+      alert('Error con los datos del usuario')
     }
   }
 }

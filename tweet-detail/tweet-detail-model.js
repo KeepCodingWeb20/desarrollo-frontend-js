@@ -41,3 +41,20 @@ export const removeTweet = async (tweetId) => {
   })
 
 }
+
+export const updateTweet = async (tweetId, content) => {
+  const url = `http://localhost:8000/api/tweets2/${tweetId}`;
+  const token = localStorage.getItem('token');
+
+  const response = await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `bearer ${token}`,
+    },
+    body: JSON.stringify({
+      content
+    })
+  })
+
+}

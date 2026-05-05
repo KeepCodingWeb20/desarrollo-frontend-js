@@ -19,6 +19,13 @@ export const buildRemoveTweetButton = () => {
   return removeTweetButton
 }
 
+export const buildEditTweetButton = () => {
+  const editTweetButton = document.createElement('button')
+  editTweetButton.textContent = 'Editar tweet';
+
+  return editTweetButton
+}
+
 
 // "content": "prueba creación tweet",
 //     "userId": 1,
