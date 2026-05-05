@@ -2,13 +2,16 @@
 
 export const buildTweet = (tweet) => {
 
-  const newTweet = document.createElement('div');
-  newTweet.classList.add('tweet')
+  const newTweet = document.createElement('a');
+  newTweet.classList.add('tweet-link')
+  newTweet.setAttribute('href', `tweet-detail.html?id=${tweet.id}`)
 
   newTweet.innerHTML = `
-    <h4>${tweet.user.username} - ${tweet.updatedAt}</h4>
-    <p>${tweet.content}</p>
-    <p>${tweet.likes}</p>`;
+    <div class="tweet">
+      <h4>${tweet.user.username} - ${tweet.updatedAt}</h4>
+      <p>${tweet.content}</p>
+      <p>${tweet.likes}</p>
+    </div>`;
 
   return newTweet;
 
