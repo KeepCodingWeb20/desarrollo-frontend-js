@@ -28,3 +28,16 @@ export const getLoggedUserInfo = async () => {
   
   return data
 }
+
+export const removeTweet = async (tweetId) => {
+  const url = `http://localhost:8000/api/tweets2/${tweetId}`;
+  const token = localStorage.getItem('token');
+
+  const response = await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `bearer ${token}`,
+    }
+  })
+
+}
